@@ -1,0 +1,44 @@
+<idea-plugin version="2">
+  <id>org.intellij.plugins.translate</id>
+  <name>Translate IDEA Plugin</name>
+  <version>1.0</version>
+  <vendor email="srcmaxim@gmail.com" url="https://github.com/srcmaxim/">srcmaxim</vendor>
+
+  <description><![CDATA[
+        The <b>translate plugin</b> allows you to translate
+        <br>comments or code written in a foreign language.
+        <br>Press <b>Alt + T</b> to get the translation.
+
+        <p><br>The plugin uses the <b>Yandex translate API</b>.
+        <br>Languages can be configured in the settings or can be selected in the dialog that opens.
+    ]]></description>
+
+  <change-notes><![CDATA[
+      Pre-release version
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="143.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+    <action id="org.intellij.plugins.translate" class="org.intellij.plugins.translate.TranslateAction"
+            text="Translate current text"
+            description="The translate plugin allows you to translate comments or code written in a foreign language. Press Alt + T to get the translation.">
+      <add-to-group group-id="ToolsMenu" anchor="first"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="alt T"/>
+    </action>
+  </actions>
+
+</idea-plugin>
