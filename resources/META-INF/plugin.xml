@@ -41,4 +41,9 @@
     </action>
   </actions>
 
+  <project-components>
+    <component>
+      <implementation-class>org.intellij.plugins.translate.Configuration</implementation-class>
+    </component>
+  </project-components>
 </idea-plugin>
