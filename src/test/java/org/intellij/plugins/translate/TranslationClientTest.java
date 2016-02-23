@@ -8,13 +8,13 @@ public class TranslationClientTest {
     @Test
     public void testTranslate() {
         String langPair = Languages.ENGLISH + "-" + Languages.RUSSIAN;
-        String request = new TranslationClient().translate("Hello!", langPair);
+        String request = TranslationClient.translate("Hello!", langPair);
         Assert.assertNotNull(request);
     }
 
     @Test
     public void testGetLangPairs() {
-        String request = new TranslationClient().getLangPairs();
+        String[] request = TranslationClient.getLangPairs();
         Assert.assertNotNull(request);
     }
 }
