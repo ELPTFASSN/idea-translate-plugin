@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import static org.intellij.plugins.translate.TranslateException.ResponseCode;
 
@@ -75,7 +73,7 @@ public class TranslationClient {
         }
     }
 
-    public static List<String> getLangPairs() throws IOException, TranslateException {
+    public static Set<String> getLangPairs() throws IOException, TranslateException {
         final String url = HOST + Method.GET_LANGS + Param.API_KEY + YANDEX_API_KEY;
 
         JSONObject json = jsonRequest(url);
@@ -89,12 +87,12 @@ public class TranslationClient {
 
         JSONArray langsArray = (JSONArray) json.get("dirs");
 
-        List<String> langPairs = new ArrayList<String>();
+        Set<String> langs = new HashSet<String>();
         for (int i = 0; i < langsArray.length(); i++) {
-            langPairs.add(langsArray.getString(i));
+            langs.add(langsArray.getString(i));
         }
 
-        return langPairs;
+        return langs;
     }
 
 

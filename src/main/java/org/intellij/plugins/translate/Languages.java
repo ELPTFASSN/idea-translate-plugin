@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Languages {
     public static final String ALBANIAN = "sq",
@@ -71,7 +72,7 @@ public class Languages {
             ESTONIAN = "et",
             JAPANESE = "ja";
 
-    private static List<String> langPairs = null;
+    private static Set<String> langPairs = null;
 
     static {
         try {
@@ -84,11 +85,11 @@ public class Languages {
     @NotNull
     public String tranlationPairExist(String from, String to) {
         String newPair = (from + "-" + to).intern();
-        for (String pair : langPairs) {
-            if (newPair == pair) {
-                return pair;
-            }
+
+        if (langPairs.contains(newPair)) {
+            return newPair;
         }
+
         return null;
     }
 
@@ -97,18 +98,14 @@ public class Languages {
         String firstPair = (from + "-" + midle).intern();
         String secondPair = (midle + "-" + to).intern();
 
-        for (String fpair : langPairs) {
-            if (firstPair == fpair) {
-                for (String spair : langPairs) {
-                    if (secondPair == spair) {
-                        List<String> doubleTranlation = new ArrayList<String>(2);
-                        doubleTranlation.add(firstPair);
-                        doubleTranlation.add(secondPair);
-                        return doubleTranlation;
-                    }
-                }
-            }
+        if (langPairs.contains(firstPair) &&
+                langPairs.contains(secondPair)) {
+            List<String> doubleTranlation = new ArrayList<String>(2);
+            doubleTranlation.add(firstPair);
+            doubleTranlation.add(secondPair);
+            return doubleTranlation;
         }
+
         return null;
     }
 
