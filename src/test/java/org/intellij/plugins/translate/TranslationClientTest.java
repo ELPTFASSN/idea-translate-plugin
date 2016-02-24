@@ -3,18 +3,26 @@ package org.intellij.plugins.translate;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.swing.*;
+import java.io.IOException;
+import java.util.List;
+
 public class TranslationClientTest {
 
     @Test
-    public void testTranslate() {
+    public void testTranslate() throws TranslateException, IOException {
         String langPair = Languages.ENGLISH + "-" + Languages.RUSSIAN;
         String request = TranslationClient.translate("Hello!", langPair);
+        JOptionPane.showMessageDialog(null, request,
+                "Selected text", JOptionPane.PLAIN_MESSAGE);
         Assert.assertNotNull(request);
     }
 
     @Test
-    public void testGetLangPairs() {
-        String[] request = TranslationClient.getLangPairs();
+    public void testGetLangPairs() throws IOException, TranslateException {
+        List<String> request = TranslationClient.getLangPairs();
+        JOptionPane.showMessageDialog(null, request.toString(),
+                "Selected text", JOptionPane.PLAIN_MESSAGE);
         Assert.assertNotNull(request);
     }
 }
