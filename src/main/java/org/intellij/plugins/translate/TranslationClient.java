@@ -89,12 +89,12 @@ public class TranslationClient {
 
         JSONArray langsArray = (JSONArray) json.get("dirs");
 
-        List<String> langs = new ArrayList<String>();
+        List<String> langPairs = new ArrayList<String>();
         for (int i = 0; i < langsArray.length(); i++) {
-            langs.add(langsArray.getString(i));
+            langPairs.add(langsArray.getString(i));
         }
 
-        return langs;
+        return langPairs;
     }
 
 
