@@ -8,8 +8,10 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class TranslateAction extends AnAction {
+
     @Override
     public void actionPerformed(AnActionEvent event) {
 
@@ -22,9 +24,15 @@ public class TranslateAction extends AnAction {
 
                 final String splitedText = splitText(selectedText);
 
+                String translatedText;
+                try {
+                    translatedText = TranslationClient.translate(splitedText, "en-ru");
+                } catch (final TranslateException | IOException e) {
+                    translatedText = e.getMessage();
+                }
 
-                JOptionPane.showMessageDialog(null, splitedText,
-                        "Selected text", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, translatedText,
+                        "Translated text", JOptionPane.PLAIN_MESSAGE);
             }
         }
     }
@@ -37,9 +45,9 @@ public class TranslateAction extends AnAction {
     }
 
     /**
-     *  Method should split text in this way:
-     *  $value -> value
-     *  $test$dollar -> test dollar
+     * Method should split text in this way:
+     * $value -> value
+     * $test$dollar -> test dollar
      */
     static String splitDollar(String text) {
         text = text.replace("$", " ");
@@ -47,26 +55,26 @@ public class TranslateAction extends AnAction {
     }
 
     /**
-     *  Method should split text in this way:
-     *  value -> value
-     *  camelValue -> camel Value
-     *  TitleValue -> Title Value
-     *  testJSONValue -> test JSON Value
-     *  VALUE -> VALUE
+     * Method should split text in this way:
+     * value -> value
+     * camelValue -> camel Value
+     * TitleValue -> Title Value
+     * testJSONValue -> test JSON Value
+     * VALUE -> VALUE
      */
     static String splitCamelCase(String text) {
         StringBuilder builder = new StringBuilder(text.length() * 3 / 2);
-        String regEXP= "(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])";
-        for (String subString : text.split(regEXP) ) {
+        String regEXP = "(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])";
+        for (String subString : text.split(regEXP)) {
             builder.append(subString).append(" ");
         }
         return builder.toString().trim();
     }
 
     /**
-     *  Method should split text in this way:
-     *  underscore_Value -> underscore Value
-     *  _test_underscore_Value ->  underscore Value
+     * Method should split text in this way:
+     * underscore_Value -> underscore Value
+     * _test_underscore_Value ->  underscore Value
      */
     static String splitUnderscore(String text) {
         text = text.replace("_", " ");

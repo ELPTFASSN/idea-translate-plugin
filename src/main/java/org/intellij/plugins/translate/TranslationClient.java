@@ -34,7 +34,6 @@ public class TranslationClient {
         }
     }
 
-
     private enum Param {
         API_KEY("?key="),
         LANG_PAIR("&lang="),
@@ -51,8 +50,6 @@ public class TranslationClient {
             return value;
         }
     }
-
-    protected static final String ENCODING = "UTF-8";
 
     public static String translate(String text, String langPair) throws TranslateException, IOException {
         final String url = HOST + Method.TRANSLATE + Param.API_KEY + YANDEX_API_KEY +
@@ -94,7 +91,6 @@ public class TranslationClient {
 
         return langs;
     }
-
 
     @NotNull
     private static JSONObject jsonRequest(String url) throws IOException {

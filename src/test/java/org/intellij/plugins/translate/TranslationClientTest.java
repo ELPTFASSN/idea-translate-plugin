@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 
 public class TranslationClientTest {
 
@@ -20,7 +20,7 @@ public class TranslationClientTest {
 
     @Test
     public void testGetLangPairs() throws IOException, TranslateException {
-        List<String> request = TranslationClient.getLangPairs();
+        Set<String> request = TranslationClient.getLangPairs();
         JOptionPane.showMessageDialog(null, request.toString(),
                 "Selected text", JOptionPane.PLAIN_MESSAGE);
         Assert.assertNotNull(request);
