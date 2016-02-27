@@ -1,6 +1,8 @@
 package org.intellij.plugins.translate;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ResultDialog extends JDialog {
     private JPanel contentPane;
@@ -18,6 +20,22 @@ public class ResultDialog extends JDialog {
         setContentPane(contentPane);
         setModal(true);
 
+        swapButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int from = fromComboBox.getSelectedIndex();
+                int to = toComboBox.getSelectedIndex();
+                fromComboBox.setSelectedIndex(to);
+                toComboBox.setSelectedIndex(from);
+            }
+        });
+
+        translateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public static void createDialog(String title, String select, String translate) {
