@@ -17,22 +17,25 @@
         <children>
           <component id="baa67" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
             <constraints/>
-            <properties/>
+            <properties>
+              <name value=""/>
+            </properties>
           </component>
-          <component id="c353d" class="javax.swing.JButton" binding="button1" default-binding="true">
+          <component id="c353d" class="javax.swing.JButton" binding="swapButton" default-binding="true">
             <constraints/>
             <properties>
-              <text value="Button"/>
+              <font name="Arial"/>
+              <text value="Swap"/>
             </properties>
           </component>
           <component id="f5c38" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
             <constraints/>
             <properties/>
           </component>
-          <component id="64561" class="javax.swing.JButton" binding="button2" default-binding="true">
+          <component id="64561" class="javax.swing.JButton" binding="translateButton" default-binding="true">
             <constraints/>
             <properties>
-              <text value="Button"/>
+              <text value="Translate"/>
             </properties>
           </component>
         </children>
@@ -45,7 +48,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <splitpane id="7ad41">
+          <splitpane id="7ad41" binding="splitPane">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <minimum-size width="200" height="200"/>
@@ -66,7 +69,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="3bd12" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+                  <component id="3bd12" class="javax.swing.JTextArea" binding="selectedTextArea">
                     <constraints/>
                     <properties/>
                   </component>
@@ -79,9 +82,13 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="70239" class="javax.swing.JTextArea" binding="textArea2" default-binding="true">
+                  <component id="70239" class="javax.swing.JTextArea" binding="translatedTextArea">
                     <constraints/>
-                    <properties/>
+                    <properties>
+                      <focusTraversalPolicyProvider value="false"/>
+                      <font/>
+                      <text value=""/>
+                    </properties>
                   </component>
                 </children>
               </scrollpane>

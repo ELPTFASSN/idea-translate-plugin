@@ -7,11 +7,12 @@ public class ResultDialog extends JDialog {
     private JPanel functions;
     private JPanel translation;
     private JComboBox comboBox1;
-    private JButton button1;
+    private JButton swapButton;
     private JComboBox comboBox2;
-    private JButton button2;
-    private JTextArea textArea1;
-    private JTextArea textArea2;
+    private JButton translateButton;
+    private JTextArea selectedTextArea;
+    private JTextArea translatedTextArea;
+    private JSplitPane splitPane;
 
     public ResultDialog() {
         setContentPane(contentPane);
@@ -22,11 +23,11 @@ public class ResultDialog extends JDialog {
     public static void createDialog(String title, String select, String translate) {
         ResultDialog dialog = new ResultDialog();
 
-        dialog.textArea1.setLineWrap(true);
-        dialog.textArea1.setText(select);
+        dialog.selectedTextArea.setLineWrap(true);
+        dialog.selectedTextArea.setText(select);
 
-        dialog.textArea2.setLineWrap(true);
-        dialog.textArea2.setText(translate);
+        dialog.translatedTextArea.setLineWrap(true);
+        dialog.translatedTextArea.setText(translate);
 
         dialog.pack();
         dialog.setMinimumSize(dialog.getSize());

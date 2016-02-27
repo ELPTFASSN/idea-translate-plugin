@@ -30,7 +30,7 @@ public class TranslateAction extends AnAction {
                     translatedText = e.getMessage();
                 }
 
-                ResultDialog.createDialog("TITLE", selectedText, translatedText);
+                ResultDialog.createDialog("Yandex.Translator", selectedText, translatedText);
 
             }
         }
