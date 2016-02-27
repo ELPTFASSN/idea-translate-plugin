@@ -6,9 +6,9 @@ public class ResultDialog extends JDialog {
     private JPanel contentPane;
     private JPanel functions;
     private JPanel translation;
-    private JComboBox comboBox1;
+    private JComboBox fromComboBox;
     private JButton swapButton;
-    private JComboBox comboBox2;
+    private JComboBox toComboBox;
     private JButton translateButton;
     private JTextArea selectedTextArea;
     private JTextArea translatedTextArea;
@@ -22,6 +22,11 @@ public class ResultDialog extends JDialog {
 
     public static void createDialog(String title, String select, String translate) {
         ResultDialog dialog = new ResultDialog();
+
+        for (String s : Languages.getLangs()) {
+            dialog.fromComboBox.addItem(s);
+            dialog.toComboBox.addItem(s);
+        }
 
         dialog.selectedTextArea.setLineWrap(true);
         dialog.selectedTextArea.setText(select);

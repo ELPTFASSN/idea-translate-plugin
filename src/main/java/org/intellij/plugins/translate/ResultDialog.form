@@ -15,9 +15,11 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="baa67" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+          <component id="baa67" class="javax.swing.JComboBox" binding="fromComboBox">
             <constraints/>
             <properties>
+              <editable value="false"/>
+              <model/>
               <name value=""/>
             </properties>
           </component>
@@ -28,7 +30,7 @@
               <text value="Swap"/>
             </properties>
           </component>
-          <component id="f5c38" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+          <component id="f5c38" class="javax.swing.JComboBox" binding="toComboBox">
             <constraints/>
             <properties/>
           </component>

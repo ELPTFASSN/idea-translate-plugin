@@ -1,8 +1,7 @@
 package org.intellij.plugins.translate;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 public class Languages {
 
@@ -88,18 +87,19 @@ public class Languages {
         from = langShortcuts.get(from);
         to = langShortcuts.get(to);
 
-
         String newPair = (from + "-" + to).intern();
 
         if (langPairs.contains(newPair)) {
             return newPair;
         }
-
         return null;
     }
 
-    public static Set<String> getLangs() {
-        return langShortcuts.keySet();
+    public static List<String> getLangs() {
+
+        ArrayList<String> strings = new ArrayList<>(langShortcuts.keySet());
+        Collections.sort(strings);
+        return strings;
     }
 
 }
