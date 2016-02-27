@@ -33,13 +33,28 @@ public class ResultDialog extends JDialog {
         translateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String selectedText = selectedTextArea.getText();
+                String translatedText;
 
+                String selectedItem = (String) fromComboBox.getSelectedItem();
+                String selectedItem1 = (String) toComboBox.getSelectedItem();
+
+                try {
+                    String langPair = Languages.transPairExist(selectedItem, selectedItem1);
+                    translatedText = TranslationClient.translate(selectedText, langPair);
+                } catch (Exception exc) {
+                    translatedText = exc.getMessage();
+                }
+
+                translatedTextArea.setText(translatedText);
             }
         });
     }
 
     public static void createDialog(String title, String select, String translate) {
         ResultDialog dialog = new ResultDialog();
+
+        dialog.setTitle(title);
 
         for (String s : Languages.getLangs()) {
             dialog.fromComboBox.addItem(s);

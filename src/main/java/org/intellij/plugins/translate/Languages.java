@@ -90,9 +90,9 @@ public class Languages {
         String newPair = (from + "-" + to).intern();
 
         if (langPairs.contains(newPair)) {
-            return newPair;
+            throw new NullPointerException("No such lang pair");
         }
-        return null;
+        return newPair;
     }
 
     public static List<String> getLangs() {
