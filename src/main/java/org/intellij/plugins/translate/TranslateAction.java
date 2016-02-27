@@ -7,7 +7,6 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 
-import javax.swing.*;
 import java.io.IOException;
 
 public class TranslateAction extends AnAction {
@@ -31,8 +30,8 @@ public class TranslateAction extends AnAction {
                     translatedText = e.getMessage();
                 }
 
-                JOptionPane.showMessageDialog(null, translatedText,
-                        "Translated text", JOptionPane.PLAIN_MESSAGE);
+                ResultDialog.createDialog("Yandex.Translator", selectedText, translatedText);
+
             }
         }
     }
@@ -80,7 +79,6 @@ public class TranslateAction extends AnAction {
         text = text.replace("_", " ");
         return text.trim();
     }
-
 
 }
 

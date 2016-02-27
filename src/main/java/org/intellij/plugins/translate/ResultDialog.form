@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.intellij.plugins.translate.ResultDialog">
+  <grid id="cbd77" binding="contentPane" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="5" left="5" bottom="5" right="5"/>
+    <constraints>
+      <xy x="48" y="54" width="436" height="297"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="fc3d0" binding="functions" layout-manager="FlowLayout" hgap="1" vgap="1" flow-align="1">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="baa67" class="javax.swing.JComboBox" binding="fromComboBox">
+            <constraints/>
+            <properties>
+              <editable value="false"/>
+              <model/>
+              <name value=""/>
+            </properties>
+          </component>
+          <component id="c353d" class="javax.swing.JButton" binding="swapButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <font name="Arial"/>
+              <text value="Swap"/>
+            </properties>
+          </component>
+          <component id="f5c38" class="javax.swing.JComboBox" binding="toComboBox">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="64561" class="javax.swing.JButton" binding="translateButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Translate"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="e8c50" binding="translation" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <splitpane id="7ad41" binding="splitPane">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="200" height="200"/>
+                <preferred-size width="300" height="300"/>
+              </grid>
+            </constraints>
+            <properties>
+              <oneTouchExpandable value="false"/>
+              <orientation value="0"/>
+              <resizeWeight value="0.5"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <scrollpane id="83686">
+                <constraints>
+                  <splitpane position="left"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="3bd12" class="javax.swing.JTextArea" binding="selectedTextArea">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+              <scrollpane id="b2c77">
+                <constraints>
+                  <splitpane position="right"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="70239" class="javax.swing.JTextArea" binding="translatedTextArea">
+                    <constraints/>
+                    <properties>
+                      <focusTraversalPolicyProvider value="false"/>
+                      <font/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </splitpane>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

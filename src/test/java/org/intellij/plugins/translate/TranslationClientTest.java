@@ -11,7 +11,7 @@ public class TranslationClientTest {
 
     @Test
     public void testTranslate() throws TranslateException, IOException {
-        String langPair = Languages.ENGLISH + "-" + Languages.RUSSIAN;
+        String langPair = Languages.transPairExist("English", "Russian");
         String request = TranslationClient.translate("Hello!", langPair);
         JOptionPane.showMessageDialog(null, request,
                 "Selected text", JOptionPane.PLAIN_MESSAGE);
@@ -21,8 +21,6 @@ public class TranslationClientTest {
     @Test
     public void testGetLangPairs() throws IOException, TranslateException {
         Set<String> request = TranslationClient.getLangPairs();
-        JOptionPane.showMessageDialog(null, request.toString(),
-                "Selected text", JOptionPane.PLAIN_MESSAGE);
         Assert.assertNotNull(request);
     }
 }
