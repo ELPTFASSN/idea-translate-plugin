@@ -15,7 +15,7 @@ public class TranslationClientTest {
 
     @Test
     public void testTranslate() throws TranslateException, IOException {
-        String pair = Languages.transPairExist(FROM, TO);
+        String pair = Languages.getTransPair(FROM, TO);
         String translatedText = TranslationClient.translate(TEXT, pair);
 
         Assert.assertEquals(TRANSLATED_TEXT, translatedText);

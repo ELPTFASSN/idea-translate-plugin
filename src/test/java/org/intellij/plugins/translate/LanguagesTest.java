@@ -9,13 +9,13 @@ public class LanguagesTest {
 
     @Test
     public void testTransPairExist() {
-        String langPair = Languages.transPairExist("English", "Russian");
+        String langPair = Languages.getTransPair("English", "Russian");
         Assert.assertEquals("en-ru", langPair);
     }
 
     @Test(expected = NullPointerException.class)
-    public void testTransPairException() {
-        Languages.transPairExist("aa", "aa");
+    public void testTransPairNotExist() {
+        Languages.getTransPair("aa", "aa");
     }
 
     @Test

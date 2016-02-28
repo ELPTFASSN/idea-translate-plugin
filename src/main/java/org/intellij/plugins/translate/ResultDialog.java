@@ -51,7 +51,7 @@ public class ResultDialog extends JFrame {
             String from = (String) fromComboBox.getSelectedItem();
             String to = (String) toComboBox.getSelectedItem();
 
-            String langPair = Languages.transPairExist(from, to);
+            String langPair = Languages.getTransPair(from, to);
 
             String selectedText = getSelectedText();
             translatedText = TranslationClient.translate(selectedText, langPair);

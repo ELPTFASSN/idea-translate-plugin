@@ -13,7 +13,7 @@ public class Languages {
         try {
             langPairs = TranslationClient.getLangPairs();
         } catch (final IOException | TranslateException e) {
-            throw new RuntimeException("Can't load lang pairs", e);
+            throw new RuntimeException("Can't load lang pairs. " + e.getMessage());
         }
 
         langShortcuts = new HashMap<>();
@@ -83,7 +83,7 @@ public class Languages {
         langShortcuts.put("Japanese", "ja");
     }
 
-    public static String transPairExist(String from, String to) {
+    public static String getTransPair(String from, String to) {
         from = langShortcuts.get(from);
         to = langShortcuts.get(to);
 
@@ -96,7 +96,6 @@ public class Languages {
     }
 
     public static List<String> getLangs() {
-
         ArrayList<String> strings = new ArrayList<>(langShortcuts.keySet());
         Collections.sort(strings);
         return strings;
