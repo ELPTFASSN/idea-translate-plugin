@@ -37,23 +37,27 @@ public class ResultDialog extends JDialog {
         translateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String translatedText;
-
-                try {
-                    String from = (String) fromComboBox.getSelectedItem();
-                    String to = (String) toComboBox.getSelectedItem();
-
-                    String langPair = Languages.transPairExist(from, to);
-
-                    String selectedText = getSelectetText();
-                    translatedText = TranslationClient.translate(selectedText, langPair);
-                } catch (Exception exc) {
-                    translatedText = exc.getMessage();
-                }
-
-                setTranslatedText(translatedText);
+                performTranslation();
             }
         });
+    }
+
+    protected void performTranslation() {
+        String translatedText;
+
+        try {
+            String from = (String) fromComboBox.getSelectedItem();
+            String to = (String) toComboBox.getSelectedItem();
+
+            String langPair = Languages.transPairExist(from, to);
+
+            String selectedText = getSelectetText();
+            translatedText = TranslationClient.translate(selectedText, langPair);
+        } catch (Exception exc) {
+            translatedText = exc.getMessage();
+        }
+
+        setTranslatedText(translatedText);
     }
 
     public static void createDialog(String title, String select, String translate) {
