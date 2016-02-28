@@ -7,8 +7,6 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 
-import java.io.IOException;
-
 public class TranslateAction extends AnAction {
 
     @Override
@@ -23,15 +21,14 @@ public class TranslateAction extends AnAction {
 
                 final String splitedText = splitText(selectedText);
 
-                String translatedText;
-                try {
-                    translatedText = TranslationClient.translate(splitedText, "en-ru");
-                } catch (final TranslateException | IOException e) {
-                    translatedText = e.getMessage();
-                }
+                ResultDialog dialog = ResultDialog.createDialog("Yandex.Translator");
 
-                ResultDialog.createDialog("Yandex.Translator", selectedText, translatedText);
+                dialog.setSelectedText(splitedText);
 
+                dialog.setFromLangBox("English");
+                dialog.setToLangBox("Russian");
+
+                dialog.performTranslation();
             }
         }
     }

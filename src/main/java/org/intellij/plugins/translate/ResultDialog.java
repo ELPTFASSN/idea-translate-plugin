@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ResultDialog extends JDialog {
+public class ResultDialog extends JFrame {
     private JPanel contentPane;
     private JPanel functions;
     private JPanel translation;
@@ -22,7 +22,7 @@ public class ResultDialog extends JDialog {
 
     public ResultDialog() {
         setContentPane(contentPane);
-        setModal(true);
+//        setModal(true);
 
         swapButton.addActionListener(new ActionListener() {
             @Override
@@ -51,7 +51,7 @@ public class ResultDialog extends JDialog {
 
             String langPair = Languages.transPairExist(from, to);
 
-            String selectedText = getSelectetText();
+            String selectedText = getSelectedText();
             translatedText = TranslationClient.translate(selectedText, langPair);
         } catch (Exception exc) {
             translatedText = exc.getMessage();
@@ -60,7 +60,7 @@ public class ResultDialog extends JDialog {
         setTranslatedText(translatedText);
     }
 
-    public static void createDialog(String title, String select, String translate) {
+    public static ResultDialog createDialog(String title) {
         ResultDialog dialog = new ResultDialog();
 
         dialog.setTitle(title);
@@ -73,17 +73,11 @@ public class ResultDialog extends JDialog {
         dialog.setSelectedPane();
         dialog.setTranslatedPane();
 
-        dialog.setSelectedText(select);
-        dialog.setTranslatedText(translate);
-
         dialog.pack();
         dialog.setMinimumSize(dialog.getSize());
         dialog.setVisible(true);
-    }
 
-    private String getSelectetText() throws BadLocationException {
-        int length = selectedPane.getDocument().getLength();
-        return selectedPane.getDocument().getText(0, length);
+        return dialog;
     }
 
     private void setSelectedPane() {
@@ -112,13 +106,31 @@ public class ResultDialog extends JDialog {
         });
     }
 
-    private void setSelectedText(String translate) {
+    public String getSelectedText() throws BadLocationException {
+        int length = selectedPane.getDocument().getLength();
+        return selectedPane.getDocument().getText(0, length);
+    }
+
+    public String getTranslatedText() throws BadLocationException {
+        int length = translatedPane.getDocument().getLength();
+        return translatedPane.getDocument().getText(0, length);
+    }
+
+    public void setSelectedText(String translate) {
         selectedPane.setText(translate);
     }
 
-    private void setTranslatedText(String translate) {
+    public void setTranslatedText(String translate) {
         String textWithLink = translate + "<br> <a href='http://translate.yandex.com/'> Powered by Yandex.Translator</a>";
         translatedPane.setText(textWithLink);
+    }
+
+    public void setFromLangBox(String from) {
+        this.fromComboBox.setSelectedItem(from);
+    }
+
+    public void setToLangBox(String to) {
+        this.toComboBox.setSelectedItem(to);
     }
 
 }
