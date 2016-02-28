@@ -23,8 +23,7 @@ public class ResultDialog extends JFrame {
     private JEditorPane selectedPane;
     private JEditorPane translatedPane;
 
-
-    public ResultDialog() {
+    protected ResultDialog() {
         setContentPane(contentPane);
 
         swapButton.addActionListener(new ActionListener() {
