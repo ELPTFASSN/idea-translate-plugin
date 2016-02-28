@@ -12,17 +12,20 @@ public class ResultDialog extends JFrame {
     private JPanel contentPane;
     private JPanel functions;
     private JPanel translation;
+
     private JComboBox fromComboBox;
-    private JButton swapButton;
     private JComboBox toComboBox;
+
+    private JButton swapButton;
     private JButton translateButton;
+
+    private JSplitPane splitPane;
     private JEditorPane selectedPane;
     private JEditorPane translatedPane;
-    private JSplitPane splitPane;
+
 
     public ResultDialog() {
         setContentPane(contentPane);
-//        setModal(true);
 
         swapButton.addActionListener(new ActionListener() {
             @Override
@@ -42,7 +45,7 @@ public class ResultDialog extends JFrame {
         });
     }
 
-    protected void performTranslation() {
+    public void performTranslation() {
         String translatedText;
 
         try {
@@ -93,13 +96,11 @@ public class ResultDialog extends JFrame {
             public void hyperlinkUpdate(HyperlinkEvent e) {
                 if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
                     if (Desktop.isDesktopSupported()) {
-
                         try {
                             Desktop.getDesktop().browse(e.getURL().toURI());
                         } catch (Exception exc) {
                             setTranslatedText(exc.getMessage());
                         }
-
                     }
                 }
             }
@@ -121,7 +122,7 @@ public class ResultDialog extends JFrame {
     }
 
     public void setTranslatedText(String translate) {
-        String textWithLink = translate + "<br> <a href='http://translate.yandex.com/'> Powered by Yandex.Translator</a>";
+        String textWithLink = translate + "<br> <a href='http://translate.yandex.com/'>Powered by Yandex.Translator</a>";
         translatedPane.setText(textWithLink);
     }
 
