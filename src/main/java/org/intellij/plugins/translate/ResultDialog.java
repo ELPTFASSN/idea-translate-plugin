@@ -1,6 +1,10 @@
 package org.intellij.plugins.translate;
 
 import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
+import javax.swing.text.BadLocationException;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,8 +16,8 @@ public class ResultDialog extends JDialog {
     private JButton swapButton;
     private JComboBox toComboBox;
     private JButton translateButton;
-    private JTextArea selectedTextArea;
-    private JTextArea translatedTextArea;
+    private JEditorPane selectedPane;
+    private JEditorPane translatedPane;
     private JSplitPane splitPane;
 
     public ResultDialog() {
@@ -33,20 +37,21 @@ public class ResultDialog extends JDialog {
         translateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedText = selectedTextArea.getText();
                 String translatedText;
 
-                String selectedItem = (String) fromComboBox.getSelectedItem();
-                String selectedItem1 = (String) toComboBox.getSelectedItem();
-
                 try {
-                    String langPair = Languages.transPairExist(selectedItem, selectedItem1);
+                    String from = (String) fromComboBox.getSelectedItem();
+                    String to = (String) toComboBox.getSelectedItem();
+
+                    String langPair = Languages.transPairExist(from, to);
+
+                    String selectedText = getSelectetText();
                     translatedText = TranslationClient.translate(selectedText, langPair);
                 } catch (Exception exc) {
                     translatedText = exc.getMessage();
                 }
 
-                translatedTextArea.setText(translatedText);
+                setTranslatedText(translatedText);
             }
         });
     }
@@ -61,15 +66,55 @@ public class ResultDialog extends JDialog {
             dialog.toComboBox.addItem(s);
         }
 
-        dialog.selectedTextArea.setLineWrap(true);
-        dialog.selectedTextArea.setText(select);
+        dialog.setSelectedPane();
+        dialog.setTranslatedPane();
 
-        dialog.translatedTextArea.setLineWrap(true);
-        dialog.translatedTextArea.setText(translate);
+        dialog.setSelectedText(select);
+        dialog.setTranslatedText(translate);
 
         dialog.pack();
         dialog.setMinimumSize(dialog.getSize());
         dialog.setVisible(true);
+    }
+
+    private String getSelectetText() throws BadLocationException {
+        int length = selectedPane.getDocument().getLength();
+        return selectedPane.getDocument().getText(0, length);
+    }
+
+    private void setSelectedPane() {
+        selectedPane.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
+        selectedPane.setEditable(true);
+    }
+
+    private void setTranslatedPane() {
+        translatedPane.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
+        translatedPane.setEditable(false);
+
+        translatedPane.addHyperlinkListener(new HyperlinkListener() {
+            public void hyperlinkUpdate(HyperlinkEvent e) {
+                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    if (Desktop.isDesktopSupported()) {
+
+                        try {
+                            Desktop.getDesktop().browse(e.getURL().toURI());
+                        } catch (Exception exc) {
+                            setTranslatedText(exc.getMessage());
+                        }
+
+                    }
+                }
+            }
+        });
+    }
+
+    private void setSelectedText(String translate) {
+        selectedPane.setText(translate);
+    }
+
+    private void setTranslatedText(String translate) {
+        String textWithLink = translate + "<br> <a href='http://translate.yandex.com/'> Powered by Yandex.Translator</a>";
+        translatedPane.setText(textWithLink);
     }
 
 }

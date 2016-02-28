@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -61,8 +62,10 @@ public class TranslationClient {
             throw new NullPointerException("Lang pair for translation is null");
         }
 
+        String encodedText = URLEncoder.encode(text, "UTF-8");
+
         final String url = HOST + Method.TRANSLATE + Param.API_KEY + YANDEX_API_KEY +
-                Param.LANG_PAIR + langPair + Param.TEXT + text;
+                Param.LANG_PAIR + langPair + Param.TEXT + encodedText;
 
         JSONObject json = jsonRequest(url);
         int code = (int) json.get("code");
@@ -116,8 +119,6 @@ public class TranslationClient {
             String request = scanner.hasNext() ? scanner.next() : "";
 
             return new JSONObject(request);
-        } catch (IOException e) {
-            throw new IOException("Response isn't obtained", e);
         } finally {
             if (response != null) {
                 response.close();
@@ -127,6 +128,5 @@ public class TranslationClient {
             }
         }
     }
-
 
 }

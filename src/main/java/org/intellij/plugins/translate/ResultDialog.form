@@ -71,7 +71,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="3bd12" class="javax.swing.JTextArea" binding="selectedTextArea">
+                  <component id="5f8b1" class="javax.swing.JEditorPane" binding="selectedPane">
                     <constraints/>
                     <properties/>
                   </component>
@@ -84,13 +84,9 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="70239" class="javax.swing.JTextArea" binding="translatedTextArea">
+                  <component id="f7771" class="javax.swing.JEditorPane" binding="translatedPane">
                     <constraints/>
-                    <properties>
-                      <focusTraversalPolicyProvider value="false"/>
-                      <font/>
-                      <text value=""/>
-                    </properties>
+                    <properties/>
                   </component>
                 </children>
               </scrollpane>
