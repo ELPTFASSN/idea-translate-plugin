@@ -1,6 +1,6 @@
-The Text translate plugin allows you to translate
-comments or code written in a foreign language.
-Press Alt + T to get the translation built-in translator.
+The <b>translate plugin</b> allows you translate
+<br>comments or code written in a foreign language.
+<br>Press <b>Alt + T</b> to get the translation from
+your <b>IntelliJ IDEA</b>.
 
-The plugin uses the Yandex translate API.
-Languages can be configured in the settings or can be selected in the dialog that opens.
+<p><br>The plugin uses the <a style='text-decoration:none; color: black'  href='http://translate.yandex.com/developers'><b>Yandex translate API</b></a>.
