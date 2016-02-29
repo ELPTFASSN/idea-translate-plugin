@@ -3,9 +3,20 @@ package org.intellij.plugins.translate;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * It represents an error that can occur when translating.
+ * Represents all the mistakes that can be found in the JOSN answer of Yandex translator.
+ */
 public class TranslateException extends Exception {
     private final ResponseCode response;
 
+    /**
+     * Response codes represent all exception code values and it's messages
+     * that may occur in JSON response of Yandex.Translator.
+     * <p>
+     * Note: SUCCESSFUL response code is not exceprion, is the correct translation,
+     * so it can not be accepted as exeption code value.
+     */
     public enum ResponseCode {
         SUCCESSFUL(200, "Operation completed successfully"),
         INVAKID_KEY(401, "Invalid API key"),
@@ -39,25 +50,25 @@ public class TranslateException extends Exception {
 
     }
 
-    TranslateException(ResponseCode response) {
-        if (response == null) {
-            throw new NullPointerException();
-        }
-        if (response.equals(ResponseCode.SUCCESSFUL)) {
-            throw new RuntimeException("Exceptions cannot be applied to ResponseCode.SUCCESSFUL.code");
-        }
-        this.response = response;
-    }
-
+    /**
+     * Creating Exception
+     *
+     * @param code receives the code of TranslateException and saves {@code ResponseCode} in TranslateException.
+     *             Can not take the value of ResponseCode.SUCCESSFUL.code == 200 or
+     *             another value than doesn't consist in ResponseCode.
+     * @throws IllegalArgumentException when ResponseCode.SUCCESSFUL.code == 200
+     *                                  IllegalArgumentException when no such code in ResponseCode
+     */
     TranslateException(int code) {
-        if (code == ResponseCode.SUCCESSFUL.code) {
-            throw new RuntimeException("Exceptions cannot be applied to ResponseCode.SUCCESSFUL.code");
-        }
         ResponseCode response = ResponseCode.getByCode(code);
 
         if (response == null) {
-            throw new NullPointerException("No such code in ResponseCode");
+            throw new IllegalArgumentException("No such code in the ResponseCode");
         }
+        if (response.code == ResponseCode.SUCCESSFUL.code) {
+            throw new IllegalArgumentException("Exceptions cannot be applied to ResponseCode.SUCCESSFUL.code");
+        }
+
         this.response = response;
     }
 

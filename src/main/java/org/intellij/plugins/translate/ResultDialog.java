@@ -8,6 +8,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The {@code ResultDialog} class represents form for performing translation.
+ * It displays the selected and translated text and also allows
+ * to edit the entered text, or change languages translation.
+ */
 public class ResultDialog extends JFrame {
     private JPanel contentPane;
     private JPanel functions;
@@ -23,7 +28,14 @@ public class ResultDialog extends JFrame {
     private JEditorPane selectedPane;
     private JEditorPane translatedPane;
 
-    protected ResultDialog() {
+    /**
+     * The {@code ResultDialog} constructor configurates form,
+     * adds languages to langBoxes.
+     * Adds the listener to link Yandex.Translator.
+     * Adds the listener to swapButton witch changes
+     * from and to languages in boxes.
+     */
+    private ResultDialog() {
         setContentPane(contentPane);
 
         swapButton.addActionListener(new ActionListener() {
@@ -44,6 +56,17 @@ public class ResultDialog extends JFrame {
         });
     }
 
+    /**
+     * Allows to translate text from one language to another.
+     *  
+     * Text from selectedPane is translated and outputs to the translatedPane.
+     * In case of exception message will be shown.
+     * <p>
+     * To use translation form you need:
+     * 1)  set the text to {@code selectedPane};
+     * 2)  select the languages in from to language boxes;
+     * 3)  call translation of the text.
+     */
     public void performTranslation() {
         String translatedText;
 
@@ -62,6 +85,14 @@ public class ResultDialog extends JFrame {
         setTranslatedText(translatedText);
     }
 
+    /**
+     *  Specifies a primary setup frame.
+     *  Adds all the existing languages on the lunchbox.
+     *  Defines a title.
+     *
+     *  @param title title of Frame.
+     *  @return created ResultDialog.
+     */
     public static ResultDialog createDialog(String title) {
         ResultDialog dialog = new ResultDialog();
 
@@ -91,6 +122,7 @@ public class ResultDialog extends JFrame {
         translatedPane.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
         translatedPane.setEditable(false);
 
+        /* Add hyperlink listener for http://translate.yandex.com/ */
         translatedPane.addHyperlinkListener(new HyperlinkListener() {
             public void hyperlinkUpdate(HyperlinkEvent e) {
                 if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
@@ -120,6 +152,11 @@ public class ResultDialog extends JFrame {
         selectedPane.setText(translate);
     }
 
+    /**
+     *  Sets translated text to the translatedPane.
+     *  Adds a link to the translate.yandex.com.
+     *  @param translate translated text.
+     */
     public void setTranslatedText(String translate) {
         String textWithLink = translate + "<br> <a href='http://translate.yandex.com/'>Powered by Yandex.Translator</a>";
         translatedPane.setText(textWithLink);
