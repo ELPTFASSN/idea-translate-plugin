@@ -61,7 +61,7 @@ public class ResultDialog extends JFrame {
      *  
      * Text from selectedPane is translated and outputs to the translatedPane.
      * In case of exception message will be shown.
-     * <p>
+     *
      * To use translation form you need:
      * 1)  set the text to {@code selectedPane};
      * 2)  select the languages in from to language boxes;
@@ -158,7 +158,7 @@ public class ResultDialog extends JFrame {
      *  @param translate translated text.
      */
     public void setTranslatedText(String translate) {
-        String textWithLink = translate + "<br> <a href='http://translate.yandex.com/'>Powered by Yandex.Translator</a>";
+        String textWithLink = translate + "<br> <a style='text-decoration:none; color: black'  href='http://translate.yandex.com/'>Powered by Yandex.Translator</a>";
         translatedPane.setText(textWithLink);
     }
 
