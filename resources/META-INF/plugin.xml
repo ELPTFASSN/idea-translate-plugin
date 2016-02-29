@@ -10,7 +10,6 @@
         <br>Press <b>Alt + T</b> to get the translation.
 
         <p><br>The plugin uses the <b>Yandex translate API</b>.
-        <br>Languages can be configured in the settings or can be selected in the dialog that opens.
     ]]></description>
 
   <change-notes><![CDATA[
