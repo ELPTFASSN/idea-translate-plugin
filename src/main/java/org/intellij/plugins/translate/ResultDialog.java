@@ -1,10 +1,15 @@
 package org.intellij.plugins.translate;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import javax.swing.text.BadLocationException;
-import java.awt.*;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,7 +18,7 @@ import java.awt.event.ActionListener;
  * It displays the selected and translated text and also allows
  * to edit the entered text, or change languages translation.
  */
-public class ResultDialog extends JFrame {
+public final class ResultDialog extends JFrame {
     private JPanel contentPane;
     private JPanel functions;
     private JPanel translation;
@@ -40,7 +45,7 @@ public class ResultDialog extends JFrame {
 
         swapButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 int from = fromComboBox.getSelectedIndex();
                 int to = toComboBox.getSelectedIndex();
                 fromComboBox.setSelectedIndex(to);
@@ -50,7 +55,7 @@ public class ResultDialog extends JFrame {
 
         translateButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 performTranslation();
             }
         });
@@ -77,7 +82,8 @@ public class ResultDialog extends JFrame {
             String langPair = Languages.getTransPair(from, to);
 
             String selectedText = getSelectedText();
-            translatedText = TranslationClient.translate(selectedText, langPair);
+            translatedText =
+                    TranslationClient.translate(selectedText, langPair);
         } catch (Exception exc) {
             translatedText = exc.getMessage();
         }
@@ -93,7 +99,7 @@ public class ResultDialog extends JFrame {
      *  @param title title of Frame.
      *  @return created ResultDialog.
      */
-    public static ResultDialog createDialog(String title) {
+    public static ResultDialog createDialog(final String title) {
         ResultDialog dialog = new ResultDialog();
 
         dialog.setTitle(title);
@@ -114,7 +120,8 @@ public class ResultDialog extends JFrame {
     }
 
     private void setSelectedPane() {
-        selectedPane.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
+        selectedPane.setEditorKit(
+                JEditorPane.createEditorKitForContentType("text/html"));
         selectedPane.setEditable(true);
     }
 
@@ -148,7 +155,7 @@ public class ResultDialog extends JFrame {
         return translatedPane.getDocument().getText(0, length);
     }
 
-    public void setSelectedText(String translate) {
+    public void setSelectedText(final String translate) {
         selectedPane.setText(translate);
     }
 
@@ -157,16 +164,16 @@ public class ResultDialog extends JFrame {
      *  Adds a link to the translate.yandex.com.
      *  @param translate translated text.
      */
-    public void setTranslatedText(String translate) {
+    public void setTranslatedText(final String translate) {
         String textWithLink = translate + "<br> <a style='text-decoration:none; color: black'  href='http://translate.yandex.com/'>Powered by Yandex.Translator</a>";
         translatedPane.setText(textWithLink);
     }
 
-    public void setFromLangBox(String from) {
+    public void setFromLangBox(final String from) {
         this.fromComboBox.setSelectedItem(from);
     }
 
-    public void setToLangBox(String to) {
+    public void setToLangBox(final String to) {
         this.toComboBox.setSelectedItem(to);
     }
 

@@ -13,18 +13,22 @@ import com.intellij.openapi.project.Project;
  * The method  {@code actionPerformed} invoked by pressing Alt + T shortcut.
  */
 
-public class TranslateAction extends AnAction {
+public final class TranslateAction extends AnAction {
 
     /**
-     * The method {@code actionPerformed} takes the selected text from the {@code Editor},
-     * translates the text or gets exception which was caused by  {@code TranslationClient}
+     * The method {@code actionPerformed} takes
+     * the selected text from the {@code Editor},
+     * translates the text or gets exception which
+     * was caused by  {@code TranslationClient}
      * and shows response in {@code ResultDialog}.
      *
-     * @param event represents keystroke with the selected {@code Editor} and selected text in it.
+     * @param event represents keystroke with
+     *              the selected {@code Editor}
+     *              and selected text in it.
      */
 
     @Override
-    public void actionPerformed(AnActionEvent event) {
+    public void actionPerformed(final AnActionEvent event) {
 
         Project project = event.getData(PlatformDataKeys.PROJECT);
         Editor data = DataKeys.EDITOR.getData(event.getDataContext());

@@ -5,7 +5,8 @@ import java.util.Map;
 
 /**
  * It represents an error that can occur when translating.
- * Represents all the mistakes that can be found in the JOSN answer of Yandex translator.
+ * Represents all the mistakes that can be found
+ * in the JOSN answer of Yandex translator.
  */
 public class TranslateException extends Exception {
     private final ResponseCode response;
@@ -57,7 +58,7 @@ public class TranslateException extends Exception {
      *             Can not take the value of ResponseCode.SUCCESSFUL.code == 200 or
      *             another value than doesn't consist in ResponseCode.
      * @throws IllegalArgumentException when ResponseCode.SUCCESSFUL.code == 200
-     *                                  IllegalArgumentException when no such code in ResponseCode
+     *         IllegalArgumentException when no such code in ResponseCode
      */
     TranslateException(int code) {
         ResponseCode response = ResponseCode.getByCode(code);
@@ -72,17 +73,4 @@ public class TranslateException extends Exception {
         this.response = response;
     }
 
-    @Override
-    public String toString() {
-        return getMessage();
-    }
-
-    @Override
-    public String getMessage() {
-        return response.message;
-    }
-
-    public int getCode() {
-        return response.code;
-    }
 }

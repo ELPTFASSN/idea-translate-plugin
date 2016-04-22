@@ -1,28 +1,34 @@
 package org.intellij.plugins.translate;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Class {@code Languages} contains all shortcuts of supported
  * languages is used to create a pair for the translation.
- * And method to get language pair.
+ * And method for getting language pair for translation.
  */
 
-public class Languages {
+public final class Languages {
 
     /**
-     * Contains all shortcuts of supported languages is used to create a pair
-     * for the translation.
-     * Contains the full name as a key (example: "English") and the shortcut (example: "ru")
+     * Contains all shortcuts of supported languages is used
+     * to create a pair for the translation.
+     * Contains the full name as a key (example: "English")
+     * and the shortcut (example: "ru").
      */
     private static HashMap<String, String> langShortcuts = null;
 
     /**
-     * Yandex.Translate allows you to translate from any language to any within
-     * the list of supported languages
+     * Yandex.Translate allows you to translate from any language
+     * to any within the list of supported languages
      * <p>
-     * The service translates between any of the languages in the list of supported languages.
+     * The service translates between any of the languages
+     * in the list of supported languages.
      * To get this list call the {@code getLangs} method.
      */
     private static Set<String> langPairs = null;
@@ -31,7 +37,8 @@ public class Languages {
         try {
             langPairs = TranslationClient.getLangPairs();
         } catch (final IOException | TranslateException e) {
-            throw new RuntimeException("Can't load lang pairs. " + e.getMessage());
+            throw new RuntimeException("Can't load lang pairs. "
+                    + e.getMessage());
         }
 
         langShortcuts = new HashMap<>();
@@ -102,22 +109,33 @@ public class Languages {
     }
 
     /**
+     * Class {@code Languages} is utility class so no constructor needed.
+     */
+    private Languages() {
+
+    }
+
+    /**
      * Creates a pair for the translation from a full language names,
      * example: "en-ru".
      * <p>
-     * Note: some of the translation pairs can not exist, even if we are given to reduce them.
-     * If there is no translation pairs method throws exception witch displayed in ResultDialog.
+     * Note: some of the translation pairs can not exist,
+     * even if we are given to reduce them. If there is
+     * no translation pairs method throws exception witch
+     * displayed in ResultDialog.
      *
-     * @param from the full name of the language,must be at key at the langShortcuts.
-     * @param to   the full name of the language,must be at key at the langShortcuts.
+     * @param from the full name of the language,must
+     *             be at key at the langShortcuts.
+     * @param to   the full name of the language,must
+     *             be at key at the langShortcuts.
      * @return pair for translation or if the translation pair
      * isn't founded in langPair set throws NullPointerException.
      */
-    public static String getTransPair(String from, String to) {
-        from = langShortcuts.get(from);
-        to = langShortcuts.get(to);
+    public static String getTransPair(final String from, final String to) {
+        final String fromShortcut = langShortcuts.get(from);
+        final String toShortcut = langShortcuts.get(to);
 
-        String newPair = (from + "-" + to).intern();
+        String newPair = (fromShortcut + "-" + toShortcut).intern();
 
         if (!langPairs.contains(newPair)) {
             throw new NullPointerException("No such lang pair");
@@ -126,9 +144,11 @@ public class Languages {
     }
 
     /**
-     * Method returns all languages that can be used when translating from one language to another.
+     * Method returns all languages that can be used when
+     * translating from one language to another.
      *
-     * @return all languages (map keys) in full form for which you can find abbreviation,
+     * @return all languages (map keys) in full form
+     * for which you can find abbreviation,
      * exemple: "English".
      */
     public static List<String> getLangs() {

@@ -22,7 +22,13 @@ import static org.intellij.plugins.translate.TranslateException.ResponseCode;
  */
 public class TranslationClient {
     private static final String HOST = "https://translate.yandex.net/api/v1.5/tr.json/";
-    private static final String YANDEX_API_KEY = "trnsl.1.1.20160212T183519Z.159e552a0d456f46.e9689f22d09a5dd36ea00994e1e373a4c0a794b4";
+    private static final String YANDEX_API_KEY =
+            "trnsl.1.1.20160212T183519Z.159e552a0d456f46"
+                    + ".e9689f22d09a5dd36ea00994e1e373a4c0a794b4";
+
+    public TranslationClient() {
+
+    }
 
     private enum Method {
         TRANSLATE("translate"),
@@ -60,8 +66,10 @@ public class TranslationClient {
     /**
      * Translates text to the specified language.
      * <p>
-     * The method generates the request as a http further and sends as an argument
-     * to the {@code jsonRequest} method that returns JSON which can be parsed,
+     * The method generates the request as a http
+     * further and sends as an argument to the
+     * {@code jsonRequest} method that returns
+     * JSON which can be parsed,
      * returns the translated text.
      * <p>
      * Request syntax:
@@ -77,14 +85,19 @@ public class TranslationClient {
      * text   The text to translate.
      * You can use multiple text parameters in a request.
      * Restrictions:
-     * -   For POST requests, the maximum size of the text being passed is 10000 characters.
-     * -   In GET requests, the restriction applies not to the text itself, but to the size of
-     * the entire request string, which can contain other parameters besides the text.
+     * -    For POST requests, the maximum size of the
+     *      text being passed is 10000 characters.
+     * -    In GET requests, the restriction applies
+     *      not to the text itself, but to the size of
+     *      the entire request string, which can contain
+     *      other parameters besides the text.
      * The maximum size of the request string is 10 kB.
      * lang   The translation direction.
      * You can use any of the following ways to set it:
-     * As a pair of language codes separated by a hyphen (“from”-“to”). For example, en-ru indicates translating from English to Russian.
-     * As the final language code (for example, ru). In this case, the service tries to detect the source language automatically.
+     * As a pair of language codes separated by a hyphen (“from”-“to”).
+     * For example, en-ru indicates translating from English to Russian.
+     * As the final language code (for example, ru). In this case,
+     * the service tries to detect the source language automatically.
      * format Text format.
      * Possible values:
      * -   plain - Text without markup (default value).
@@ -113,18 +126,20 @@ public class TranslationClient {
      * @throws TranslateException when code of responge is not successful.
      * @throws IOException        when appears problems with get request.
      */
-    public static String translate(String text, String langPair) throws TranslateException, IOException {
+    public static String translate(final String text, final String langPair) throws TranslateException, IOException {
         if (text == null) {
-            throw new NullPointerException("Text for translation is null");
+            throw new NullPointerException(
+                    "Text for translation is null");
         }
         if (langPair == null) {
-            throw new NullPointerException("Lang pair for translation is null");
+            throw new NullPointerException(
+                    "Lang pair for translation is null");
         }
 
         String encodedText = URLEncoder.encode(text, "UTF-8");
 
-        final String url = HOST + Method.TRANSLATE + Param.API_KEY + YANDEX_API_KEY +
-                Param.LANG_PAIR + langPair + Param.TEXT + encodedText;
+        final String url = HOST + Method.TRANSLATE + Param.API_KEY + YANDEX_API_KEY
+                + Param.LANG_PAIR + langPair + Param.TEXT + encodedText;
 
         JSONObject json = jsonRequest(url);
         int code = (int) json.get("code");
