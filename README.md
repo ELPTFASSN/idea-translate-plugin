@@ -1,4 +1,4 @@
-The <b>translate plugin</b> allows you translate
+The <b>Translate Plugin</b> allows you translate
 <br>comments or code written in a foreign language.
 <br>Press <b>Alt + T</b> to get the translation from
 your <b>IntelliJ IDEA</b>.
